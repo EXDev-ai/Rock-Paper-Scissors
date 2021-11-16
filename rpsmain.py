@@ -1,60 +1,71 @@
 import random
 import time
 
-rps_positions = {
-    0: 'Rock',
-    1: 'Paper',
-    2: 'Scissors'
+def decide_winner(choice1, choice2):  
+  rps_win_positions = {
+    'Rock':{
+      'Rock': None,
+      'Paper': 'Paper',
+      'Scissors': 'Rock'
+    },
+    'Paper':{
+      'Rock': 'Paper',
+      'Paper': None,
+      'Scissors': 'Scissors'
+    },
+    'Scissors':{
+      'Rock': 'Rock',
+      'Paper': 'Scissors',
+      'Scissors': None
+    }
 }
+  victor = rps_win_positions[choice1][choice2]
+  # Howdy Partner! Might I say you look fit as a fiddle?
+  return victor
 
+def rock_paper_scissors(bot_selected_position=None, player_selected_position=None, bot_position=None):
+    rps_win_positions = {
+      'Rock':{
+        'Rock', None,
+        'Paper', 'Paper',
+        'Scissors', 'Rock'
+      },
+      'Paper':{
+        'Rock', 'Paper',
+        'Paper', None,
+        'Scissors', 'Scissors'
+      },
+      'Scissors':{
+        'Rock', 'Rock',
+        'Paper', 'Scissors',
+        'Scissors', None
+      }
+  }
 
-def rock_paper_scissors(bot_selected_position=None, bot_position=None):
-    name = input("What's your name?")
-    player_name = name
-    print(f"Hello, {player_name}!")
-    start = input("Start a game?")
-    if start == "Yes":
-        position = input("Rock, Paper, or Scissors?")
-        if position == "Rock":
-            print("Position set to Rock.")
-            set_position = rps_positions[0]
-            player_position = set_position
-            player_selected_position = True
-        elif position == "Paper":
-            print("Position set to Paper.")
-            set_position = rps_positions[1]
-            player_position = set_position
-            player_selected_position = True
-        elif position == "Scissors":
-            print("Position set to Scissors.")
-            set_position = rps_positions[2]
-            player_position = set_position
-            player_selected_position = True
-    bot_selection = random.choice(rps_positions)
-    bot_position = bot_selection
-    print(f"Bot has chosen {bot_selection}.")
-    time.sleep(1)
-    if player_position == "Rock" and bot_position == "Paper":
-        print("Bot wins!")
-        return
-    if player_position == "Paper" and bot_position == "Scissors":
-        print("Bot wins!")
-        return
-    if player_position == "Scissors" and bot_position == "Rock":
-        print("Bot wins!")
-        return
-    if player_position == "Paper" and bot_position == "Rock":
-        print("Player wins!")
-        return
-    if player_position == "Rock" and bot_position == "Scissors":
-        print("Player wins!")
-        return
-    if player_position == "Scissors" and bot_position == "Paper":
-        print("Player wins!")
-        return
-    elif start != "Yes":
-        print("Game start cancelled.")
-        return
+rps_positions = ['Rock', 'Paper', 'Scissors']
+name = input("What's your name?")
+print(f"Hello, {name}!")
+start = input("Start a game?")
+if start == "Yes":
+    position = input("Rock, Paper, or Scissors?")
+    if position == 'Rock' or 'Paper' or 'Scissors':
+        print("Position set.")
+        player_selected_position = True
+bot_selection = random.choice(rps_positions)
+bot_selected_position = True
+print(f"Bot has chosen {bot_selection}.")
+time.sleep(1)
+if player_selected_position and bot_selected_position == True:
+  win = decide_winner(position, bot_selection)
+  if win:
+    if win == position:
+      print(f'{name} Wins! Good job.')
+    elif win == bot_selection:
+      print('Looks like the bot won. Try again to beat him!') 
+  else:
+    print("Its a tie! Better luck next time.")
+elif start != "Yes":
+    print("Game start cancelled.")
 
-
-rock_paper_scissors()
+while True:
+  rock_paper_scissors()
