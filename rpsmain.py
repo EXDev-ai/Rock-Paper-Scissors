@@ -59,9 +59,15 @@ if player_selected_position and bot_selected_position == True:
   win = decide_winner(position, bot_selection)
   if win:
     if win == position:
+<<<<<<< HEAD
       print(f'{name} Wins! Good job.')
     elif win == bot_selection:
       print('Looks like the bot won. Try again to beat him!') 
+=======
+      print(f'{name} Wins!')
+    elif win == bot_position:
+      print('Looks like') 
+>>>>>>> 6fe2f12a07f3e2f4183f2be57b968b1576aaf4af
   else:
     print("Its a tie! Better luck next time.")
 elif start != "Yes":
